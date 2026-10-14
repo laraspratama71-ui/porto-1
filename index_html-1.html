@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>index.html</title>
+  <style>
+
+  </style>
+</head>
+<body>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fff6f9;
+            text-align: center;
+            margin: 20px 30px;
+        }
+
+        /* Sembunyikan radio button */
+        input[type="radio"] {
+            display: none;
+        }
+
+        .menu {
+            text-align: left;
+            font-size: 12px;
+            color: #ff5c8a;
+        }
+
+        .menu label {
+            cursor: pointer;
+            margin-right: 4px;
+        }
+
+        .menu label:hover {
+            text-decoration: underline;
+        }
+
+        hr {
+            border: none;
+            height: 1.5px;
+            background: #333;
+        }
+
+        .foto {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            border: 2px solid #333;
+            object-fit: cover;
+            margin-top: 10px;
+            background: #ffe1ea;
+        }
+
+        .nama {
+            font-family: cursive;
+            font-size: 26px;
+            margin: 10px 0 0 0;
+        }
+
+        .jabatan {
+            font-size: 12px;
+            margin: 0;
+            color: #666;
+        }
+
+        .overview {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 20px;
+            margin-top: 25px;
+        }
+
+        .isi-overview {
+            font-size: 12px;
+            font-style: italic;
+            text-align: left;
+        }
+
+        /* Box skill & hobi */
+        .wadah {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+            text-align: left;
+        }
+
+        .box {
+            width: 50%;
+            border: 1.5px solid #000;
+            background: white;
+            border-radius: 4px;
+        }
+
+        .box-judul {
+            text-align: center;
+            border-bottom: 1.5px solid #000;
+            padding: 6px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .box:first-child .box-judul { background: #ffc8d9; }
+        .box:last-child .box-judul { background: #d9c2ff; }
+
+        .box-isi {
+            padding: 10px;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .copy {
+            font-size: 11px;
+            font-style: italic;
+        }
+
+        /* Halaman */
+        .halaman {
+            display: none;
+        }
+
+        /* Contact */
+        .kontak-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1.5px solid #000;
+            background: white;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px auto;
+            max-width: 380px;
+            text-align: left;
+            font-size: 12px;
+        }
+
+        .kontak-ikon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ffc8d9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .kontak-item:nth-child(2) .kontak-ikon { background: #d9c2ff; }
+        .kontak-item:nth-child(3) .kontak-ikon { background: #ffe1ea; }
+
+        .kontak-label {
+            font-weight: 600;
+            font-size: 11px;
+            color: #d6336c;
+        }
+
+        /* Download CV */
+        .cv-box {
+            border: 1.5px solid #000;
+            background: white;
+            border-radius: 4px;
+            max-width: 380px;
+            margin: 25px auto;
+            overflow: hidden;
+        }
+
+        .cv-header {
+            background: #ffc8d9;
+            padding: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            border-bottom: 1.5px solid #000;
+        }
+
+        .cv-isi {
+            padding: 15px;
+            font-size: 12px;
+            text-align: left;
+            line-height: 1.8;
+        }
+
+        .btn-download {
+            display: inline-block;
+            margin-top: 12px;
+            background: #ff5c8a;
+            color: white;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .btn-download:hover {
+            background: #d6336c;
+        }
+
+        /* ===== ATURAN PINDAH HALAMAN ===== */
+
+        /* Default: Home (About Me) yang tampil */
+        #about { display: block; }
+
+        /* Kalau radio "contact" dicentang */
+        #tab-contact:checked ~ #about { display: none; }
+        #tab-contact:checked ~ #contact { display: block; }
+
+        /* Kalau radio "cv" dicentang */
+        #tab-cv:checked ~ #about { display: none; }
+        #tab-cv:checked ~ #cv { display: block; }
+
+        /* Warna menu yang lagi aktif */
+        #tab-home:checked ~ .menu label[for="tab-home"],
+        #tab-contact:checked ~ .menu label[for="tab-contact"],
+        #tab-cv:checked ~ .menu label[for="tab-cv"],
+        #tab-about:checked ~ .menu label[for="tab-about"] {
+            font-weight: 600;
+            color: #d6336c;
+            text-decoration: underline;
+        }
+
+        /* Kalau About me diklik, tampilkan juga halaman about */
+        #tab-about:checked ~ #about { display: block; }
+    </style>
+</head>
+<body>
+
+    <!-- RADIO BUTTON (disembunyikan) -->
+    <input type="radio" name="tab" id="tab-home" checked>
+    <input type="radio" name="tab" id="tab-cv">
+    <input type="radio" name="tab" id="tab-contact">
+    <input type="radio" name="tab" id="tab-about">
+
+    <!-- MENU -->
+    <p class="menu">
+        <label for="tab-home">Home</label> |
+        <label for="tab-cv">Download CV</label> |
+        <label for="tab-contact">Contact</label> |
+        <label for="tab-about">About me</label>
+    </p>
+    <hr>
+
+    <!-- FOTO & NAMA -->
+    <img src="https://lh3.googleusercontent.com/d/1GXz3j-b5C7NZS573Rkb1U-GvYhr-zW28" class="foto">
+    <h1 class="nama">Laras Pratama</h1>
+    <p class="jabatan">( Siswi SMK Komputama )</p>
+    <hr>
+
+    <!-- ============ HALAMAN ABOUT / HOME ============ -->
+    <div id="about" class="halaman">
+        <h2 class="overview">Overview</h2>
+        <p class="isi-overview">
+            Hi, saya adalah Laras Pratama siswi SMK Komputama jurusan TJKT. 
+            Saat ini saya sedang belajar membuat website portfolio pertama saya menggunakan HTML dan CSS.
+        </p>
+
+        <div class="wadah">
+            <div class="box">
+                <div class="box-judul">Skill</div>
+                <div class="box-isi">
+                    - HTML (Beginner)<br>
+                    - Desain Canva<br>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-judul">Hobi</div>
+                <div class="box-isi">
+                    - Menggambar<br>
+                    - Nonton Drakor<br>
+                    - Fotografi
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ HALAMAN CONTACT ============ -->
+    <div id="contact" class="halaman">
+        <h2 class="overview">Contact</h2>
+        <p class="isi-overview">Kalau mau ngobrol atau tanya-tanya, bisa hubungi aku di sini ya:</p>
+
+        <div class="kontak-item">
+            <div class="kontak-ikon">📧</div>
+            <div>
+                <div class="kontak-label">Email</div>
+                laras.pratama@email.com
+            </div>
+        </div>
+        <div class="kontak-item">
+            <div class="kontak-ikon">📱</div>
+            <div>
+                <div class="kontak-label">WhatsApp</div>
+                0812-3456-7890
+            </div>
+        </div>
+        <div class="kontak-item">
+            <div class="kontak-ikon">📷</div>
+            <div>
+                <div class="kontak-label">Instagram</div>
+                @laras.pratama
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ HALAMAN DOWNLOAD CV ============ -->
+    <div id="cv" class="halaman">
+        <h2 class="overview">Download CV</h2>
+        <p class="isi-overview">Silakan download CV aku di bawah ini ya 👇</p>
+
+        <div class="cv-box">
+            <div class="cv-header">📄 CV - Laras Pratama</div>
+            <div class="cv-isi">
+                <b>Nama:</b> Laras Pratama<br>
+                <b>Sekolah:</b> SMK Komputama<br>
+                <b>Jurusan:</b> TJKT<br>
+                <b>Skill:</b> HTML, Desain Canva<br>
+                <b>Hobi:</b> Menggambar, Nonton Drakor, Fotografi
+                <br><br>
+                <a href="#" class="btn-download" download>⬇ Download CV</a>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <p class="copy">Copyright 2026 © Laras Pratama.</p>
+
+</body>
+</html>
+  <script>
+
+  </script>
+</body>
+</html>
